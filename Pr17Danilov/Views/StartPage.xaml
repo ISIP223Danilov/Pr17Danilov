@@ -1,0 +1,36 @@
+﻿<Page x:Class="Pr17Danilov.Views.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="StartPage">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Content="Мастер:"/>
+            <ComboBox x:Name="MasterCombo" Width="150" Margin="5"/>
+            <Label Content="Тип услуги:"/>
+            <ComboBox x:Name="ServiceTypeCombo" Width="150" Margin="5"/>
+            <Button Content="Показать" Width="80" Margin="10,0,0,0" Click="Show_Click"/>
+        </StackPanel>
+
+        <ListView x:Name="MastersListView" Grid.Row="2" Margin="0,10,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Мастер" Width="150" DisplayMemberBinding="{Binding MasterName}"/>
+                    <GridViewColumn Header="Услуги" Width="300" DisplayMemberBinding="{Binding Services}"/>
+                    <GridViewColumn Header=" " Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Выбрать" Click="SelectMaster_Click" Tag="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

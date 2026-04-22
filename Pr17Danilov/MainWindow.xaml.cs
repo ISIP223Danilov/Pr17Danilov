@@ -1,4 +1,5 @@
-﻿using Pr17Danilov.Views;
+﻿using Pr17Danilov.Models;
+using Pr17Danilov.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,41 @@ namespace Pr17Danilov
         public MainWindow()
         {
             InitializeComponent();
-            NavigationService.Initialize(MainFrame);
+            MainFrame.Navigate(new StartPage());
+        }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
+
+            if (SessionService.IsAuthenticated)
+            {
+                LoginBtn.Visibility = Visibility.Collapsed;
+                AccountBtn.Visibility = Visibility.Visible;
+                LogoutBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void AccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SessionService.CurrentUser?.Role == UserRole.Client)
+            {
+                MainFrame.Navigate(new AccountPage());
+            }
+        }
+
+        private void ProductsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ProductsPage());
+        }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SessionService.Logout();
+            LoginBtn.Visibility = Visibility.Visible;
+            AccountBtn.Visibility = Visibility.Collapsed;
+            LogoutBtn.Visibility = Visibility.Collapsed;
             MainFrame.Navigate(new StartPage());
         }
     }
