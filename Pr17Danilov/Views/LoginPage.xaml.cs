@@ -1,4 +1,4 @@
-﻿using Pr17Danilov.Views;
+﻿using Pr17Danilov.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +14,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pr17Danilov
+namespace Pr17Danilov.Views
 {
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        public MainWindow()
+        public LoginPage()
         {
             InitializeComponent();
-            NavigationService.Initialize(MainFrame);
-            MainFrame.Navigate(new StartPage());
+            DataContext = new LoginViewModel();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }
